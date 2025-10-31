@@ -46,7 +46,7 @@ class ModelTraining:
         except Exception as e:
             logger.error(f"Error while loading data {e}")
             raise CustomException("Failed to load data" ,  e)
-        
+
     def train_lgbm(self,X_train,y_train):
         try:
             logger.info("Intializing our model")
@@ -78,11 +78,11 @@ class ModelTraining:
             logger.info(f"Best paramters are : {best_params}")
 
             return best_lgbm_model
-        
+
         except Exception as e:
             logger.error(f"Error while training model {e}")
             raise CustomException("Failed to train model" ,  e)
-    
+
     def evaluate_model(self , model , X_test , y_test):
         try:
             logger.info("Evaluating our model")
@@ -108,7 +108,7 @@ class ModelTraining:
         except Exception as e:
             logger.error(f"Error while evaluating model {e}")
             raise CustomException("Failed to evaluate model" ,  e)
-        
+
     def save_model(self,model):
         try:
             os.makedirs(os.path.dirname(self.model_output_path),exist_ok=True)
@@ -120,7 +120,7 @@ class ModelTraining:
         except Exception as e:
             logger.error(f"Error while saving model {e}")
             raise CustomException("Failed to save model" ,  e)
-    
+
     def run(self):
         try:
             with mlflow.start_run():
@@ -149,12 +149,7 @@ class ModelTraining:
         except Exception as e:
             logger.error(f"Error in model training pipeline {e}")
             raise CustomException("Failed during model training pipeline" ,  e)
-        
+
 if __name__=="__main__":
     trainer = ModelTraining(PROCESSED_TRAIN_DATA_PATH,PROCESSED_TEST_DATA_PATH,MODEL_OUTPUT_PATH)
     trainer.run()
-        
-
-    
-
-            

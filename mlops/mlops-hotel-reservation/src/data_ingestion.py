@@ -33,7 +33,7 @@ class DataIngestion:
         except Exception as e:
             logger.error("Error while downloading the csv file")
             raise CustomException("Failed to downlaod csv file ", e)
-        
+
     def split_data(self):
         try:
             logger.info("Starting the splitting process")
@@ -45,11 +45,11 @@ class DataIngestion:
 
             logger.info(f"Train data saved to {TRAIN_FILE_PATH}")
             logger.info(f"Test data saved to {TEST_FILE_PATH}")
-        
+
         except Exception as e:
             logger.error("Error while splitting data")
             raise CustomException("Failed to split data into training and test sets ", e)
-        
+
     def run(self):
 
         try:
@@ -59,10 +59,10 @@ class DataIngestion:
             self.split_data()
 
             logger.info("Data ingestion completed sucesfully")
-        
+
         except CustomException as ce:
             logger.error(f"CustomException : {str(ce)}")
-        
+
         finally:
             logger.info("Data ingestion completed")
 

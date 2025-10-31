@@ -23,8 +23,8 @@ class DataProcessor:
 
         if not os.path.exists(self.processed_dir):
             os.makedirs(self.processed_dir)
-        
-    
+
+
     def preprocess_data(self,df):
         try:
             logger.info("Starting our Data Processing step")
@@ -58,11 +58,11 @@ class DataProcessor:
                 df[column] = np.log1p(df[column])
 
             return df
-        
+
         except Exception as e:
             logger.error(f"Error during preprocess step {e}")
             raise CustomException("Error while preprocess data", e)
-        
+
     def balance_data(self,df):
         try:
             logger.info("Handling Imbalanced Data")
@@ -77,11 +77,11 @@ class DataProcessor:
 
             logger.info("Data balanced sucesffuly")
             return balanced_df
-        
+
         except Exception as e:
             logger.error(f"Error during balancing data step {e}")
             raise CustomException("Error while balancing data", e)
-    
+
     def select_features(self,df):
         try:
             logger.info("Starting our Feature selection step")
@@ -111,11 +111,11 @@ class DataProcessor:
             logger.info("Feature slection completed sucesfully")
 
             return top_10_df
-        
+
         except Exception as e:
             logger.error(f"Error during feature selection step {e}")
             raise CustomException("Error while feature selection", e)
-    
+
     def save_data(self,df , file_path):
         try:
             logger.info("Saving our data in processed folder")
@@ -142,26 +142,26 @@ class DataProcessor:
             test_df = self.balance_data(test_df)
 
             train_df = self.select_features(train_df)
-            test_df = test_df[train_df.columns]  
+            test_df = test_df[train_df.columns]
 
             self.save_data(train_df,PROCESSED_TRAIN_DATA_PATH)
             self.save_data(test_df , PROCESSED_TEST_DATA_PATH)
 
-            logger.info("Data processing completed sucesfully")    
+            logger.info("Data processing completed sucesfully")
         except Exception as e:
             logger.error(f"Error during preprocessing pipeline {e}")
             raise CustomException("Error while data preprocessing pipeline", e)
-              
-    
-    
+
+
+
 if __name__=="__main__":
     processor = DataProcessor(TRAIN_FILE_PATH,TEST_FILE_PATH,PROCESSED_DIR,CONFIG_PATH)
-    processor.process() 
+    processor.process()
 
 
 
 
 
-# most of the visualisations weren't done in this code. Multicolleanity wasn't done too because 
+# most of the visualisations weren't done in this code. Multicolleanity wasn't done too because
 # it doesnt exist there as we have already checked in the code. Correlation matrix was also not done because it was checked
 #in the code.

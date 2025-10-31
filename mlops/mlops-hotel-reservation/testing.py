@@ -12,11 +12,10 @@ def divide_number(a,b):
     except Exception as e:
         logger.error("Error occured")
         raise CustomException("Custom error zero occured",sys)
-    
+
 if __name__=="__main__":
     try:
         logger.info("starting main program")
         divide_number(10,0)
     except CustomException as ce:
         logger.error(str(ce))
-
